@@ -6,4 +6,12 @@
 }
 
 <h1>@Model.Name</h1>
+<ul>
+    <li>Membership Type: @Model.MembershipType.Name</li>
+    @if (Model.BirthdayDate != null)
+    {
+        <li>Birthday Date: @Model.BirthdayDate.Value.Day/@Model.BirthdayDate.Value.Month/@Model.BirthdayDate.Value.Year</li>
+    }
+
+</ul>
 
