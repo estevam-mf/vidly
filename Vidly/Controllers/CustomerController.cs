@@ -41,8 +41,19 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(CustomerModel CustomerModel)
         {
+            if (!ModelState.IsValid)
+            {
+                var CustomerFormViewModel = new CustomerFormViewModel()
+                {
+                    MembershipType = _context.MembershipType.ToList(),
+                    CustomerModel = CustomerModel
+                };
+                return View("CostumerForm", CustomerFormViewModel);
+            }
+
             if (CustomerModel.Id == 0)
                 _context.Customers.Add(CustomerModel);
             else
@@ -50,7 +61,7 @@ namespace Vidly.Controllers
                 var customerInDb = _context.Customers.SingleOrDefault(x => x.Id == CustomerModel.Id);
                 customerInDb.BirthdayDate = CustomerModel.BirthdayDate;
                 customerInDb.IsSubscribedToNewsLetter = CustomerModel.IsSubscribedToNewsLetter;
-                customerInDb.MembershipType = CustomerModel.MembershipType;
+                customerInDb.MembershipTypeId = CustomerModel.MembershipTypeId;
                 customerInDb.Name = CustomerModel.Name;
             }
             _context.SaveChanges();

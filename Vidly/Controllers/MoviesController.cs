@@ -49,6 +49,7 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(MovieModel MovieModel)
         {
             if (MovieModel.Id == 0)
