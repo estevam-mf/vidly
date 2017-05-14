@@ -42,7 +42,6 @@ namespace Vidly.Controllers
             var model = new MovieFormViewModel()
             {
                 GenreModelList = listGenresModel,
-                MovieModel = null
             };
 
             return View("MovieForm", model);
@@ -75,10 +74,9 @@ namespace Vidly.Controllers
             var movieInDb = _context.Movies.SingleOrDefault(x => x.Id == id);
             var listGenresModel = _context.Genres.ToList();
 
-            var movieFormViewModel = new MovieFormViewModel()
+            var movieFormViewModel = new MovieFormViewModel(movieInDb)
             {
                 GenreModelList = listGenresModel,
-                MovieModel = movieInDb
             };
 
             if (movieInDb == null)

@@ -6,43 +6,37 @@
 }
 
 
-@if (Model.MovieModel == null)
-{
-    <h2>New Movie</h2>
-}
-else
-{
-    <h2>Edit Movie</h2>
-}
+<h2>@Model.Title()</h2>
+
 
 @using (Html.BeginForm("Save", "Movies"))
 {
     <div class="form-group">
-        @Html.LabelFor(x => x.MovieModel.Name)
-        @Html.TextBoxFor(x => x.MovieModel.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.MovieModel.Name)
+        @Html.LabelFor(x => x.Name)
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Name)
     </div>
     <div class="form-group">
-        @Html.LabelFor(x => x.MovieModel.ReleaseDate)
-        @Html.TextBoxFor(x => x.MovieModel.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.MovieModel.ReleaseDate)
+        @Html.LabelFor(x => x.ReleaseDate)
+        @Html.TextBoxFor(x => x.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.ReleaseDate)
     </div>
     <div class="form-group">
-        @Html.LabelFor(x => x.MovieModel.GenreModelId)
-        @Html.DropDownListFor(x => x.MovieModel.GenreModelId, new SelectList(Model.GenreModelList, "Id", "Name"), "Select Genre", new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.MovieModel.GenreModelId)
+        @Html.LabelFor(x => x.GenreModelId)
+        @Html.DropDownListFor(x => x.GenreModelId, new SelectList(Model.GenreModelList, "Id", "Name"), "Select Genre", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.GenreModelId)
     </div>
     <div class="form-group">
-        @Html.LabelFor(x => x.MovieModel.NumberInStock)
-        @Html.TextBoxFor(x => x.MovieModel.NumberInStock, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.MovieModel.NumberInStock)
+        @Html.LabelFor(x => x.NumberInStock)
+        @Html.TextBoxFor(x => x.NumberInStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.NumberInStock)
     </div>
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(x => x.MovieModel.Id)
+    @Html.HiddenFor(x => x.Id)
     <button type="submit" class="btn btn-primary">Save</button>
 }
 
-@section scripts 
+@section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
 }
