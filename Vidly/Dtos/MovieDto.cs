@@ -17,6 +17,8 @@ namespace Vidly.Dtos
         [Required(ErrorMessage = "Please enter movie's gender.")]
         public int GenreModelId { get; set; }
 
+        public GenreDto Genre { get; set; }
+
         [Required(ErrorMessage = "Please enter movie's release date.")]
         public DateTime ReleaseDate { get; set; }
 

@@ -9,11 +9,11 @@ using Vidly.ViewModel;
 
 namespace Vidly.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomersController : Controller
     {
         private ApplicationDbContext _context;
 
-        public CustomerController()
+        public CustomersController()
         {
             _context = new ApplicationDbContext();
         }
@@ -25,8 +25,7 @@ namespace Vidly.Controllers
 
         public ActionResult Index()
         {
-            var model = _context.Customers.Include(x => x.MembershipType).ToList();
-            return View(model);
+            return View();
         }
 
         public ActionResult Details(int id)
