@@ -9,10 +9,13 @@
 <p>@Html.ActionLink("New Movie", "New", "Movies", null, new { @class = "btn btn-primary" }) <br /></p>
 
 <table id="movies" class="table table-bordered table-hover">
-    <tr>
-        <th>Movie</th>
-        <th>Genre</th>
-    </tr>
+    <thead>
+        <tr>
+            <th>Movie</th>
+            <th>Genre</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
 </table>
 
 @section scripts{

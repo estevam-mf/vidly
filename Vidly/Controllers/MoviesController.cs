@@ -23,10 +23,12 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
-
         public ActionResult Index()
         {
-            return View();
+            if(User.IsInRole(RoleName.CanManageMovies))
+                return View("List");
+
+            return View("ReadOnlyList");
         }
 
         public ActionResult Details(int id)
@@ -35,6 +37,7 @@ namespace Vidly.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var listGenresModel = _context.Genres.ToList();
@@ -48,6 +51,7 @@ namespace Vidly.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Save(MovieModel MovieModel)
         {
             if (MovieModel.Id == 0)
@@ -68,6 +72,7 @@ namespace Vidly.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movieInDb = _context.Movies.SingleOrDefault(x => x.Id == id);
