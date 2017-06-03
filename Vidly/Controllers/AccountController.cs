@@ -155,16 +155,17 @@ namespace Vidly.Controllers
                 var user = new ApplicationUser {
                     UserName = model.Email,
                     Email = model.Email,
-                    DrivingLicense = model.DrivingLicense
+                    DrivingLicense = model.DrivingLicense,
+                    PhoneNumber = model.Phone                    
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    //Temp code
-                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-                    var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    await roleManager.CreateAsync(new IdentityRole("CanManageMovies"));
-                    await UserManager.AddToRoleAsync(user.Id, "CanManageMovies");
+                    ////Temp code
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManager.CreateAsync(new IdentityRole("CanManageMovies"));
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManageMovies");
 
 
 
@@ -384,7 +385,8 @@ namespace Vidly.Controllers
                 }
                 var user = new ApplicationUser { UserName = model.Email,
                                                 Email = model.Email,
-                                                DrivingLicense = model.DrivingLicense
+                                                DrivingLicense = model.DrivingLicense,
+                                                PhoneNumber = model.Phone                                                
                                                 };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
